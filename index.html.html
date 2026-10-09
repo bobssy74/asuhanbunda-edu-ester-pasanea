@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>AsuhanBunda Edu - Portal Interaktif Asuhan Persalinan, Nifas, &amp; Partograf</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--ink:#0b3c49;--teal:#0e7c86;--sky:#e3f5f8;--mint:#dff4e8;--line:#bfe3e8}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:#f6fcfd;color:var(--ink);font-family:'Nunito Sans',system-ui,sans-serif;line-height:1.6}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.25}
+.pg{display:none}.pg.on{display:block}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.1rem}
+.btn{background:var(--teal);color:#fff;border-radius:10px;padding:.55rem 1.1rem;font-weight:700}
+.btn:hover{background:#0b666e}.btn.alt{background:#fff;color:var(--teal);border:1px solid var(--teal)}
+.nv{padding:.45rem .8rem;border-radius:999px;white-space:nowrap;font-weight:600;font-size:.9rem}
+.nv.on{background:var(--teal);color:#fff}.nv:not(.on):hover{background:var(--sky)}
+input,select{border:1px solid var(--line);border-radius:8px;padding:.4rem .5rem;width:100%;background:#fff}
+:focus-visible{outline:3px solid #f2b134;outline-offset:2px}
+td,th{padding:.35rem .5rem;border-bottom:1px solid var(--line);text-align:center;font-size:.85rem}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;margin-top:.5rem;background:#fff}
+.opt:hover{background:var(--sky)}
+</style></head>
+<body>
+<header class="sticky top-0 z-30 bg-white/95 border-b" style="border-color:var(--line);top:env(safe-area-inset-top,0px)">
+ <div class="max-w-6xl mx-auto px-4 py-2 flex items-center gap-3">
+  <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17" fill="#0e7c86"/><path d="M17 26c-6-4-8-8-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 25 15c0 3-2 7-8 11z" fill="#dff4e8"/><path d="M17 11v8M13 15h8" stroke="#0e7c86" stroke-width="2" stroke-linecap="round"/></svg>
+  <b class="text-lg" style="font-family:Fraunces,serif">AsuhanBunda Edu</b>
+ </div>
+ <nav id="nav" class="max-w-6xl mx-auto px-3 pb-2 flex gap-1 overflow-x-auto" aria-label="Navigasi utama"></nav>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-6">
+<!-- BERANDA -->
+<section id="home" class="pg on">
+ <div class="rounded-2xl p-6 md:p-10 grid md:grid-cols-2 gap-6 items-center" style="background:linear-gradient(135deg,#e3f5f8,#dff4e8)">
+  <div>
+   <h1 class="text-3xl md:text-4xl font-bold">Asuhan yang tepat, ibu dan bayi selamat</h1>
+   <p class="mt-3">Portal belajar interaktif untuk asuhan persalinan, pemantauan dengan partograf, perawatan nifas, dan menyusui. Berlatih langsung, bukan hanya membaca.</p>
+   <div class="mt-5 flex flex-wrap gap-2"><button class="btn" onclick="go('partograf')">Coba partograf digital</button><button class="btn alt" onclick="openIntro()">Tentang platform</button></div>
+  </div>
+  <svg viewBox="0 0 320 200" class="w-full max-w-sm mx-auto" role="img" aria-label="Ilustrasi ibu menggendong bayi">
+   <circle cx="160" cy="100" r="92" fill="#fff"/>
+   <circle cx="140" cy="62" r="20" fill="#0e7c86"/>
+   <path d="M105 160c0-34 16-54 35-54s35 20 35 54z" fill="#0e7c86"/>
+   <ellipse cx="182" cy="120" rx="30" ry="16" fill="#dff4e8" stroke="#0e7c86" stroke-width="3" transform="rotate(-18 182 120)"/>
+   <circle cx="203" cy="109" r="11" fill="#f6d9c4"/>
+   <path d="M70 70c14-22 30-22 40-8M250 52c-10-14-22-14-30-4" stroke="#0e7c86" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+ </div>
+ <div id="quick" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6"></div>
+</section>
+
+<!-- PARTOGRAF -->
+<section id="partograf" class="pg">
+ <h2 class="text-2xl font-bold">Simulasi partograf digital</h2>
+ <p class="mt-1 max-w-3xl">Isi pemantauan fase aktif (pembukaan 4 cm ke atas). Titik pembukaan akan digambar pada grafik, lalu dibandingkan dengan garis waspada dan garis bertindak.</p>
+ <div class="grid lg:grid-cols-3 gap-4 mt-4">
+  <form id="pf" class="card grid grid-cols-2 gap-3 content-start" onsubmit="return false">
+   <label class="text-sm">Jam ke- (0–12)<input id="fh" type="number" min="0" max="12" step="0.5" value="0"></label>
+   <label class="text-sm">Pembukaan (4–10 cm)<input id="fd" type="number" min="4" max="10" step="0.5" value="4"></label>
+   <label class="text-sm">Penurunan kepala<select id="fs"><option>5/5</option><option>4/5</option><option>3/5</option><option>2/5</option><option>1/5</option><option>0/5</option></select></label>
+   <label class="text-sm">His per 10 menit<input id="fc" type="number" min="0" max="6" value="3"></label>
+   <label class="text-sm">DJJ (x/menit)<input id="ff" type="number" min="60" max="220" value="140"></label>
+   <label class="text-sm">Nadi ibu<input id="fn" type="number" min="40" max="160" value="84"></label>
+   <label class="text-sm">Tekanan darah<input id="fb" value="110/70"></label>
+   <label class="text-sm">Suhu (°C)<input id="ft" type="number" step="0.1" value="36.8"></label>
+   <button class="btn col-span-2" onclick="addP()">Tambah ke partograf</button>
+   <div class="col-span-2 flex gap-2"><button class="btn alt flex-1" onclick="demo()">Isi contoh</button><button class="btn alt flex-1" onclick="rows=[];drawP()">Reset</button></div>
+  </form>
+  <div class="lg:col-span-2 card">
+   <div class="overflow-x-auto"><svg id="pg" viewBox="0 0 620 330" class="w-full min-w-[480px]" role="img" aria-label="Grafik pembukaan serviks terhadap waktu"></svg></div>
+   <p id="pfb" class="mt-2 rounded-lg p-3 text-sm" style="background:var(--sky)">Belum ada data. Tambahkan pemantauan pertama pada jam 0 dengan pembukaan 4 cm.</p>
+  </div>
+ </div>
+ <div class="card mt-4 overflow-x-auto"><table class="w-full"><thead><tr><th>Jam</th><th>Pembukaan</th><th>Turun</th><th>His</th><th>DJJ</th><th>Nadi</th><th>TD</th><th>Suhu</th><th>Interpretasi</th></tr></thead><tbody id="pt"></tbody></table></div>
+ <div id="how" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"></div>
+</section>
+
+<section id="apn" class="pg"><h2 class="text-2xl font-bold">Modul asuhan persalinan normal (APN)</h2><p class="mt-1 max-w-3xl">Ketuk tiap kala untuk membuka rinciannya.</p><div id="apnl" class="mt-4 grid gap-3"></div><h3 class="text-xl font-bold mt-8">Lima benang merah</h3><div id="bm" class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-3"></div></section>
+
+<section id="nifas" class="pg"><h2 class="text-2xl font-bold">Panduan dan demonstrasi masa nifas</h2>
+ <div class="card mt-4"><h3 class="text-lg font-bold">Demonstrasi involusi uterus</h3><p class="text-sm">Geser untuk melihat posisi fundus uteri (TFU) menurut waktu setelah melahirkan.</p>
+  <input id="iv" type="range" min="0" max="4" value="0" class="mt-3" aria-label="Waktu pascasalin"><p id="ivt" class="mt-2 font-semibold"></p>
+  <svg viewBox="0 0 320 150" class="w-full max-w-md mt-2" aria-hidden="true"><path d="M110 10c-30 10-30 120 0 135M210 10c30 10 30 120 0 135" stroke="#bfe3e8" stroke-width="3" fill="none"/><line x1="100" y1="40" x2="220" y2="40" stroke="#0e7c86" stroke-dasharray="4"/><text x="226" y="44" font-size="11" fill="#0b3c49">pusat</text><line x1="100" y1="115" x2="220" y2="115" stroke="#0e7c86" stroke-dasharray="4"/><text x="226" y="119" font-size="11" fill="#0b3c49">simfisis</text><ellipse id="fu" cx="160" cy="80" rx="42" ry="22" fill="#dff4e8" stroke="#0e7c86" stroke-width="3"/></svg></div>
+ <div class="grid md:grid-cols-2 gap-4 mt-4"><div class="card"><h3 class="text-lg font-bold">Lochea</h3><table class="w-full mt-2" id="lo"></table></div><div class="card" style="background:#fff8e6;border-color:#f2b134"><h3 class="text-lg font-bold">Tanda bahaya nifas: segera ke fasilitas kesehatan</h3><ul id="bh" class="list-disc pl-5 mt-2 text-sm space-y-1"></ul></div></div>
+ <div class="card mt-4"><h3 class="text-lg font-bold">Jadwal kunjungan nifas</h3><div id="kf" class="grid sm:grid-cols-4 gap-3 mt-2"></div></div></section>
+
+<section id="asi" class="pg"><h2 class="text-2xl font-bold">Perawatan payudara dan menyusui</h2><div id="asil" class="grid md:grid-cols-2 gap-4 mt-4"></div></section>
+
+<section id="kuis" class="pg"><h2 class="text-2xl font-bold">Kuis evaluasi</h2><div id="qz" class="card mt-4 max-w-2xl"></div></section>
+</main>
+
+<footer class="mt-10 py-6 text-center text-sm text-white" style="background:var(--ink)">
+ © 2026 AsuhanBunda Edu | Ester Pasanea
+</footer>
+
+<!-- MODAL SAMBUTAN -->
+<div id="intro" class="fixed inset-0 z-50 hidden items-center justify-center p-4" style="background:rgba(11,60,73,.65)" role="dialog" aria-modal="true" aria-labelledby="it">
+ <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
+  <h2 id="it" class="text-2xl font-bold">Selamat datang di AsuhanBunda Edu</h2>
+  <p class="mt-3">Selamat datang di AsuhanBunda Edu. Website ini didedikasikan sebagai media edukasi dan pelatihan klinis interaktif untuk tenaga kesehatan serta ibu nifas. Tujuan utama pembuatan platform ini adalah untuk memudahkan pemahaman mengenai standar asuhan persalinan normal (APN), pemantauan kesejahteraan ibu dan janin melalui partograf digital, serta panduan komprehensif perawatan masa nifas dan laktasi demi menurunkan angka kesakitan dan kematian ibu.</p>
+  <p class="mt-4 pt-4 border-t" lang="en" style="border-color:var(--line)">Welcome to AsuhanBunda Edu. This website is dedicated as an interactive educational and clinical training platform for healthcare providers and postpartum mothers. The primary goal of this platform is to enhance understanding of normal childbirth care standards (APN), monitor maternal and fetal well-being through a digital partograph, and provide comprehensive postpartum and lactation care guides to help reduce maternal morbidity and mortality.</p>
+  <button id="ib" class="btn mt-5" onclick="closeIntro()">Mulai belajar / Start learning</button>
+ </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const NAV=[['home','Beranda','Ringkasan dan akses cepat'],['partograf','Partograf digital','Isi dan baca kurva pembukaan serviks'],['apn','Persalinan (APN)','Kala I sampai IV dan lima benang merah'],['nifas','Masa nifas','Involusi, lochea, tanda bahaya'],['asi','Payudara & menyusui','Perlekatan, memerah, menyimpan ASI'],['kuis','Kuis','Uji pemahaman dengan umpan balik']];
+$('#nav').innerHTML=NAV.map(n=>`<button class="nv" data-p="${n[0]}" onclick="go('${n[0]}')">${n[1]}</button>`).join('');
+$('#quick').innerHTML=NAV.slice(1).map(n=>`<button class="card text-left hover:shadow-md" onclick="go('${n[0]}')"><b class="text-lg" style="font-family:Fraunces,serif">${n[1]}</b><p class="text-sm mt-1">${n[2]}</p></button>`).join('');
+function go(id){document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id===id));document.querySelectorAll('.nv').forEach(b=>b.classList.toggle('on',b.dataset.p===id));scrollTo(0,0);if(location.hash!=='#'+id)history.replaceState(null,'','#'+id)}
+function openIntro(){const m=$('#intro');m.classList.remove('hidden');m.classList.add('flex');$('#ib').focus()}
+function closeIntro(){const m=$('#intro');m.classList.add('hidden');m.classList.remove('flex');try{sessionStorage.setItem('abe_seen','1')}catch(e){}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeIntro()});
+let seen=false;try{seen=sessionStorage.getItem('abe_seen')==='1'}catch(e){}
+if(!seen)openIntro();
+
+/* ---------- PARTOGRAF ---------- */
+let rows=[];
+const X=h=>50+h*45,Y=d=>290-(d-4)*45;
+function drawP(){
+ let s='';
+ for(let d=4;d<=10;d++)s+=`<line x1="50" x2="590" y1="${Y(d)}" y2="${Y(d)}" stroke="#d5edf1"/><text x="38" y="${Y(d)+4}" font-size="12" text-anchor="end" fill="#0b3c49">${d}</text>`;
+ for(let h=0;h<=12;h++)s+=`<line y1="20" y2="290" x1="${X(h)}" x2="${X(h)}" stroke="#d5edf1"/><text x="${X(h)}" y="308" font-size="12" text-anchor="middle" fill="#0b3c49">${h}</text>`;
+ s+=`<text x="320" y="326" font-size="12" text-anchor="middle" fill="#0b3c49">Jam sejak fase aktif</text><text transform="translate(12 155) rotate(-90)" font-size="12" text-anchor="middle" fill="#0b3c49">Pembukaan (cm)</text>`;
+ s+=`<line x1="${X(0)}" y1="${Y(4)}" x2="${X(6)}" y2="${Y(10)}" stroke="#e0a100" stroke-width="3"/><text x="${X(6)-6}" y="${Y(10)+14}" font-size="12" text-anchor="end" fill="#8a6200" font-weight="700">Garis waspada</text>`;
+ s+=`<line x1="${X(4)}" y1="${Y(4)}" x2="${X(10)}" y2="${Y(10)}" stroke="#c0392b" stroke-width="3"/><text x="${X(10)+4}" y="${Y(10)+16}" font-size="12" fill="#c0392b" font-weight="700">Garis bertindak</text>`;
+ const pts=rows.map(r=>`${X(r.h)},${Y(r.d)}`).join(' ');
+ s+=`<polyline points="${pts}" fill="none" stroke="#0e7c86" stroke-width="2.5"/>`+rows.map(r=>`<circle cx="${X(r.h)}" cy="${Y(r.d)}" r="6" fill="#0e7c86" stroke="#fff" stroke-width="2"/>`).join('');
+ $('#pg').innerHTML=s;
+ $('#pt').innerHTML=rows.length?rows.map(r=>`<tr><td>${r.h}</td><td>${r.d} cm</td><td>${r.s}</td><td>${r.c}</td><td>${r.f}</td><td>${r.n}</td><td>${r.b}</td><td>${r.t}</td><td class="text-left">${r.msg}</td></tr>`).join(''):'<tr><td colspan="9">Belum ada data</td></tr>';
+ const l=rows[rows.length-1];
+ $('#pfb').style.background=l?(l.lv==2?'#fde2df':l.lv==1?'#fff1c9':'#dff4e8'):'var(--sky)';
+ $('#pfb').textContent=l?l.msg:'Belum ada data. Tambahkan pemantauan pertama pada jam 0 dengan pembukaan 4 cm.';
+}
+function addP(){
+ const h=+$('#fh').value,d=+$('#fd').value,f=+$('#ff').value,c=+$('#fc').value,n=+$('#fn').value,t=+$('#ft').value,b=$('#fb').value.trim();
+ if(isNaN(h)||isNaN(d)||h<0||h>12||d<4||d>10){$('#pfb').textContent='Periksa isian: jam 0–12 dan pembukaan 4–10 cm.';return}
+ let lv=0,m=[];
+ if(d>=4+h)m.push('Kemajuan baik: titik berada di kiri atau pada garis waspada.');
+ else if(h<4||d>h){lv=1;m.push('Titik melewati garis waspada: evaluasi penyebab (his, posisi, kandung kemih) dan siapkan rujukan.')}
+ else{lv=2;m.push('Titik mencapai garis bertindak: lakukan tindakan atau rujuk segera sesuai kewenangan.')}
+ if(f<110||f>160){lv=Math.max(lv,1);m.push('DJJ di luar 110–160 x/menit: nilai ulang dan atasi gawat janin.')}
+ if(c<3){m.push('His belum adekuat (kurang dari 3 kali per 10 menit).')}
+ if(t>=38){lv=Math.max(lv,1);m.push('Suhu 38 °C atau lebih: curigai infeksi.')}
+ if(n>100){m.push('Nadi lebih dari 100: periksa dehidrasi, nyeri, atau infeksi.')}
+ const bp=b.split('/').map(Number);if(bp[0]>=140||bp[1]>=90){lv=Math.max(lv,1);m.push('Tekanan darah tinggi: waspadai preeklamsia.')}
+ rows.push({h,d,s:$('#fs').value,c,f,n,b,t,lv,msg:m.join(' ')});rows.sort((a,b)=>a.h-b.h);
+ $('#fh').value=Math.min(12,h+1);drawP();
+}
+function demo(){rows=[];[[0,4,140,3],[1,5,142,3],[2,5.5,138,3],[3,6,150,3],[4,6.5,136,3],[5,7,170,2],[6,7.5,140,3],[7,8,138,4]].forEach(a=>{$('#fh').value=a[0];$('#fd').value=a[1];$('#ff').value=a[2];$('#fc').value=a[3];addP()});$('#fh').value=8}
+drawP();
+$('#how').innerHTML=[['Pembukaan serviks','Diperiksa dalam tiap 4 jam. Tandai dengan titik pada garis waspada saat masuk fase aktif (4 cm).'],['Garis waspada dan bertindak','Garis waspada naik 1 cm per jam dari 4 cm. Garis bertindak sejajar, 4 jam di kanannya. Titik di kanan garis waspada berarti kemajuan lambat.'],['Penurunan kepala','Dinilai per lima bagian di atas tepi simfisis (5/5 sampai 0/5), tiap 4 jam bersama pemeriksaan dalam.'],['Kontraksi (his)','Hitung jumlah dalam 10 menit dan lamanya, tiap 30 menit. Adekuat bila 3 kali atau lebih dan tiap his lebih dari 40 detik.'],['DJJ','Dengarkan tiap 30 menit. Rentang normal 110–160 x/menit.'],['Tanda vital ibu','Nadi tiap 30 menit, tekanan darah tiap 4 jam, suhu tiap 2 jam, urin tiap 2–4 jam.']].map(a=>`<div class="card"><h3 class="font-bold text-lg">${a[0]}</h3><p class="text-sm mt-1">${a[1]}</p></div>`).join('');
+
+/* ---------- APN ---------- */
+$('#apnl').innerHTML=[['Kala I: pembukaan','Dari his teratur sampai pembukaan lengkap (10 cm). Fase laten 0 sampai kurang dari 4 cm, fase aktif 4–10 cm. Mulai partograf pada fase aktif. Berikan dukungan emosional, hidrasi, posisi nyaman, dan anjurkan berkemih tiap 2 jam.'],['Kala II: pengeluaran bayi','Dari pembukaan lengkap sampai bayi lahir. Tanda: dorongan meneran, tekanan pada anus, perineum menonjol, vulva membuka. Pimpin meneran saat ada dorongan, lindungi perineum, periksa lilitan tali pusat, lalu lakukan penilaian bayi, pengeringan, dan inisiasi menyusu dini.'],['Kala III: pengeluaran plasenta','Dari bayi lahir sampai plasenta lahir. Lakukan manajemen aktif: suntik oksitosin 10 IU intramuskular dalam 1 menit pertama, penegangan tali pusat terkendali, lalu masase fundus. Periksa kelengkapan plasenta. Plasenta diharapkan lahir dalam 30 menit.'],['Kala IV: pemantauan 2 jam','Dua jam setelah plasenta lahir. Pantau tekanan darah, nadi, tinggi fundus, kontraksi, kandung kemih, dan perdarahan tiap 15 menit pada jam pertama dan tiap 30 menit pada jam kedua. Ajarkan ibu menilai kontraksi dan masase uterus.']].map((a,i)=>`<details class="card" ${i==0?'open':''}><summary class="font-bold text-lg cursor-pointer" style="font-family:Fraunces,serif">${a[0]}</summary><p class="mt-2">${a[1]}</p></details>`).join('');
+$('#bm').innerHTML=[['Pengambilan keputusan klinik','Menilai data, menetapkan diagnosis, merencanakan dan mengevaluasi asuhan.'],['Asuhan sayang ibu dan bayi','Menghargai privasi, mengikutsertakan keluarga, dan menjelaskan setiap tindakan.'],['Pencegahan infeksi','Cuci tangan, sarung tangan, alat steril atau DTT, pengelolaan limbah.'],['Pencatatan','Dokumentasi lengkap pada partograf dan rekam medis.'],['Rujukan','Rujuk tepat waktu dengan persiapan BAKSOKU.']].map(a=>`<div class="card"><b>${a[0]}</b><p class="text-sm mt-1">${a[1]}</p></div>`).join('');
+
+/* ---------- NIFAS ---------- */
+const IV=[['Bayi baru lahir','Setinggi pusat',-2],['Plasenta lahir','Dua jari di bawah pusat',18],['Akhir minggu pertama (hari ke-7)','Pertengahan pusat dan simfisis',45],['Minggu kedua','Tidak teraba di atas simfisis',85],['Sekitar 6 minggu','Kembali ke ukuran normal (tidak teraba)',110]];
+function ivr(){const v=IV[$('#iv').value];$('#ivt').textContent=v[0]+': '+v[1];$('#fu').setAttribute('cy',Math.min(110,Math.max(36,40+v[2]-(v[2]>100?0:0))))}
+$('#iv').oninput=ivr;ivr();
+$('#lo').innerHTML='<tr><th>Jenis</th><th>Waktu</th><th>Ciri</th></tr>'+[['Rubra','Hari 1–3','Merah segar, darah dan sisa selaput'],['Sanguinolenta','Hari 4–7','Merah kecokelatan, berlendir'],['Serosa','Hari 7–14','Kekuningan atau kecokelatan'],['Alba','Setelah 2 minggu, hingga 6 minggu','Putih kekuningan, berkurang bertahap']].map(r=>`<tr><td class="font-bold">${r[0]}</td><td>${r[1]}</td><td class="text-left">${r[2]}</td></tr>`).join('');
+$('#bh').innerHTML=['Perdarahan banyak (mengganti pembalut lebih dari 2 kali dalam 1 jam) atau bergumpal besar','Demam 38 °C atau lebih, menggigil','Lochea berbau busuk','Sakit kepala hebat, pandangan kabur, bengkak pada wajah dan tangan','Nyeri atau bengkak pada betis satu sisi','Nyeri perut bawah hebat, rahim lembek','Payudara merah, nyeri, demam','Sedih berkepanjangan atau pikiran menyakiti diri atau bayi'].map(x=>`<li>${x}</li>`).join('');
+$('#kf').innerHTML=[['KF 1','6 jam sampai 2 hari'],['KF 2','3–7 hari'],['KF 3','8–28 hari'],['KF 4','29–42 hari']].map(a=>`<div class="rounded-xl p-3 text-center" style="background:var(--mint)"><b>${a[0]}</b><p class="text-sm">${a[1]}</p></div>`).join('');
+
+/* ---------- ASI ---------- */
+const L=(t,a)=>`<div class="card"><h3 class="font-bold text-lg">${t}</h3><ol class="list-decimal pl-5 mt-2 text-sm space-y-1">${a.map(x=>`<li>${x}</li>`).join('')}</ol></div>`;
+$('#asil').innerHTML=[L('Perawatan payudara masa nifas',['Cuci tangan, bersihkan puting dengan air bersih, tidak memakai sabun keras atau alkohol.','Pijat payudara melingkar dari pangkal ke arah puting dengan lembut.','Gunakan bra yang menopang dan nyaman.','Setelah menyusu, oleskan sedikit ASI pada puting dan biarkan kering.','Makan bergizi, minum cukup, dan istirahat.']),
+L('Teknik menyusui yang benar',['Ibu duduk atau berbaring nyaman, punggung bersandar.','Perut bayi menempel perut ibu, kepala dan badan bayi lurus.','Dekatkan bayi, hidung berhadapan dengan puting.','Mulut bayi terbuka lebar, areola bawah lebih banyak masuk, dagu menempel payudara.','Bibir bawah memutar keluar, terdengar bayi menelan, ibu tidak nyeri.','Susui sesuai keinginan bayi, 8–12 kali per 24 jam.']),
+L('Memerah dan menyimpan ASI',['Cuci tangan dan siapkan wadah bersih.','Pijat payudara, tekan areola dengan ibu jari dan telunjuk, lepaskan, ulangi berirama.','Suhu ruang: hingga 4 jam (hingga 6–8 jam bila sangat bersih).','Kulkas (4 °C): 3–4 hari. Freezer: sekitar 6 bulan.','Beri label tanggal, cairkan di kulkas atau rendam air hangat, jangan dimikrowave, jangan dibekukan ulang.']),
+L('Mengatasi payudara bengkak',['Susui lebih sering dan kosongkan payudara.','Kompres hangat atau mandi air hangat sebelum menyusui agar ASI mengalir.','Pijat lembut dan perah sedikit ASI bila areola tegang.','Kompres dingin setelah menyusui untuk mengurangi nyeri dan bengkak.','Bila ada benjolan merah, nyeri, dan demam, segera periksa untuk menyingkirkan mastitis.'])].join('');
+
+/* ---------- KUIS ---------- */
+const Q=[['Garis waspada pada partograf dimulai pada pembukaan berapa?',['2 cm','4 cm','6 cm','10 cm'],1,'Garis waspada dimulai pada pembukaan 4 cm (awal fase aktif) dan naik 1 cm per jam.'],
+['Garis bertindak terletak berapa jam di kanan garis waspada?',['1 jam','2 jam','4 jam','8 jam'],2,'Garis bertindak sejajar garis waspada dengan jarak 4 jam.'],
+['Rentang DJJ normal adalah...',['80–100 x/menit','110–160 x/menit','160–200 x/menit','60–90 x/menit'],1,'DJJ normal 110–160 x/menit. Di luar rentang ini perlu evaluasi.'],
+['Pemberian oksitosin pada manajemen aktif kala III dilakukan...',['Setelah plasenta lahir','Dalam 1 menit setelah bayi lahir','Saat pembukaan lengkap','Setelah 30 menit'],1,'Oksitosin 10 IU IM diberikan dalam 1 menit setelah bayi lahir, setelah memastikan tidak ada bayi kedua.'],
+['Lochea rubra berlangsung pada...',['Hari 1–3','Hari 7–14','Minggu ke-4','Minggu ke-6'],0,'Lochea rubra berwarna merah segar pada hari 1–3 nifas.'],
+['Tanda perlekatan menyusui yang benar adalah...',['Pipi bayi menyedot ke dalam','Dagu menjauh dari payudara','Bibir bawah memutar keluar dan dagu menempel','Ibu merasa nyeri tajam'],2,'Dagu menempel, mulut terbuka lebar, bibir bawah memutar keluar, dan ibu tidak nyeri.'],
+['ASI perah dapat disimpan di kulkas (4 °C) sekitar...',['1 jam','3–4 hari','1 bulan','6 bulan'],1,'Kulkas 3–4 hari; freezer sekitar 6 bulan.']];
+let qi=0,sc=0,ans=false;
+function rq(){const z=$('#qz');if(qi>=Q.length){z.innerHTML=`<h3 class="text-xl font-bold">Skor Anda: ${sc} dari ${Q.length}</h3><p class="mt-2">${sc>=6?'Pemahaman sangat baik.':sc>=4?'Cukup baik. Ulangi modul yang masih keliru.':'Pelajari kembali modul, lalu coba lagi.'}</p><button class="btn mt-4" onclick="qi=0;sc=0;rq()">Ulangi kuis</button>`;return}
+ const q=Q[qi];ans=false;z.innerHTML=`<p class="text-sm">Soal ${qi+1} dari ${Q.length}</p><h3 class="text-lg font-bold mt-1">${q[0]}</h3>${q[1].map((o,i)=>`<button class="opt" onclick="pick(${i})">${o}</button>`).join('')}<div id="fb"></div>`}
+function pick(i){if(ans)return;ans=true;const q=Q[qi],ok=i==q[2];if(ok)sc++;
+ document.querySelectorAll('.opt').forEach((b,j)=>{if(j==q[2])b.style.background='#dff4e8',b.style.borderColor='#2e9e5b';else if(j==i)b.style.background='#fde2df',b.style.borderColor='#c0392b'});
+ $('#fb').innerHTML=`<p class="mt-3 rounded-lg p-3 text-sm" style="background:var(--sky)"><b>${ok?'Benar.':'Belum tepat.'}</b> ${q[3]}</p><button class="btn mt-3" onclick="qi++;rq()">${qi+1<Q.length?'Soal berikutnya':'Lihat skor'}</button>`}
+rq();
+const h=(location.hash||'').slice(1);if(NAV.some(n=>n[0]===h))go(h);else go('home');
+</script>
+</body></html>
